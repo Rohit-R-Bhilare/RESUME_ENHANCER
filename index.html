@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume ATS Scoring System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Resume ATS Scoring & Matching System</h1>
+  </header>
+
+  <div class="container">
+    <h2>Upload Your Resume</h2>
+    <input type="file" id="resume" accept=".pdf,.doc,.docx,.txt">
+
+    <h2>Paste Job Description</h2>
+    <textarea id="jobDescription" rows="8" placeholder="Paste the job description here..."></textarea>
+
+    <button onclick="getATSScore()">Get ATS Score</button>
+
+    <div id="result" class="result">
+      <p class="score">ATS Score: <span id="scoreValue">0</span>%</p>
+      <p>Missing Keywords:</p>
+      <ul id="missingKeywords" class="missing-keywords"></ul>
+      <p id="recommendation"></p>
+    </div>
+  </div>
+
+  <script>
+    async function getATSScore() {
+      const resumeFile = document.getElementById("resume").files[0];
+      const jobDesc = document.getElementById("jobDescription").value;
+
+      if (!resumeFile || !jobDesc.trim()) {
+        alert("Please upload a resume and paste a job description.");
+        return;
+      }
+
+      // Temporary: Read resume text as plain text (works for .txt, not PDF/DOCX yet)
+      const reader = new FileReader();
+      reader.onload = async function(event) {
+        const resumeText = event.target.result;
+
+        try {
+          const response = await fetch("http://127.0.0.1:8000/score", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              resume_text: resumeText,
+              job_description: jobDesc
+            })
+          });
+
+          if (!response.ok) throw new Error("Server error");
+
+          const data = await response.json();
+
+          document.getElementById("scoreValue").innerText = data.score;
+
+          const missingList = document.getElementById("missingKeywords");
+          missingList.innerHTML = "";
+          data.missing_keywords.forEach(skill => {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            missingList.appendChild(li);
+          });
+
+          document.getElementById("recommendation").innerText = data.recommendation;
+          document.getElementById("result").style.display = "block";
+        } catch (err) {
+          console.error("Error:", err);
+          alert("Failed to get ATS score. Make sure the FastAPI server is running.");
+        }
+      };
+
+      reader.readAsText(resumeFile);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+/* ===== General Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===== Header ===== */
+header {
+  background: linear-gradient(135deg, #0073e6, #005bb5);
+  color: white;
+  padding: 25px 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Section Headings ===== */
+h2 {
+  color: #005bb5;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-left: 4px solid #0073e6;
+  padding-left: 10px;
+}
+
+/* ===== Labels & Inputs ===== */
+label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 600;
+}
+
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #fafafa;
+  transition: all 0.3s ease-in-out;
+  font-size: 15px;
+}
+
+input[type="file"]:hover,
+textarea:focus {
+  border-color: #0073e6;
+  background: #fff;
+  outline: none;
+}
+
+/* ===== Button Styling ===== */
+button {
+  display: inline-block;
+  background: linear-gradient(135deg, #0073e6, #005bb5);
+  color: white;
+  padding: 14px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #005bb5, #004494);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Results Section ===== */
+.result {
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f1f8ff;
+  border-left: 5px solid #0073e6;
+  display: none;
+}
+
+.score {
+  font-size: 26px;
+  font-weight: bold;
+  color: #0073e6;
+  margin-bottom: 10px;
+}
+
+.missing-keywords {
+  color: #d9534f;
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.missing-keywords li {
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+/* ===== Recommendation ===== */
+#recommendation {
+  margin-top: 15px;
+  font-style: italic;
+  color: #333;
+  background: #fefefe;
+  border-left: 3px solid #0073e6;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  button {
+    width: 100%;
+    text-align: center;
+  }
+}
